@@ -49,7 +49,7 @@ describe Checkout do
       end
     end
 
-    describe "#bundle discount" do
+    describe "#bulk discount" do
       let(:products) { [{sku: 'ipd', name: 'Super iPad',  price: 549.99}] }
       let(:discount_price) {499.99}
       let(:ipad_promotion) {BulkDiscountRule.new({sku: 'ipd', min_items: 5,
@@ -77,6 +77,42 @@ describe Checkout do
 
         expect(checkout.send(:total_cost)).to eq discount_price*5
         expect(checkout.total).to eq '$2499.95'
+      end
+    end
+
+    describe "#bundle discount" do
+      let(:products) { [{sku: 'vga', name: 'VGA adapter',  price: 30.00},
+                        {sku: 'mbp', name: 'MacBook Pro',  price: 1399.99}] }
+      let(:free_vga) {BundleDiscountRule.new({sku: 'vga', min_items: 1,
+                                                  discount_price: 0,
+                                                  pairing_sku: 'mbp',
+                                                  original_price: products.first[:price]})}
+      let(:price_rules) {[free_vga]}
+      subject(:checkout) { described_class.new(products, price_rules)}
+
+      it 'is expected to return the cost without discount' do
+        checkout.scan('vga')
+        checkout.scan('vga')
+
+        expect(checkout.send(:total_cost)).to eq products.first[:price]*2
+        expect(checkout.total).to eq '$60.00'
+      end
+
+      it 'is expected to apply discount price: a free VGA adapter free with every MacBook Pro sold' do
+        checkout.scan('vga')
+        checkout.scan('mbp')
+
+        expect(checkout.send(:total_cost)).to eq products.last[:price]
+        expect(checkout.total).to eq '$1399.99'
+      end
+
+      it 'is expected to apply discount price on one vga' do
+        checkout.scan('vga')
+        checkout.scan('vga')
+        checkout.scan('mbp')
+
+        expect(checkout.send(:total_cost)).to eq products.map{|p| p[:price]}.inject(:+)
+        expect(checkout.total).to eq '$1429.99'
       end
     end
   end

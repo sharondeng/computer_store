@@ -1,11 +1,12 @@
 class BaseRule
 
-  attr_reader :sku, :min_items, :original_price
+  attr_reader :sku, :min_items, :original_price, :discount_price
 
   def initialize(options)
     @sku = options[:sku]
     @min_items = options[:min_items]
     @original_price = options[:original_price]
+    @discount_price = options[:discount_price]
   end
 
   def apply(order)
