@@ -12,6 +12,6 @@ class ProductPromotionRule < BaseRule
 
   def apply_discount(order)
     # return value to be substracted from total
-    original_price - discount_price
+    (order[sku]/min_items) * (original_price - discount_price)
   end
 end
