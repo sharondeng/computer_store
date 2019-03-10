@@ -1,6 +1,6 @@
 require_relative '../../lib/price_rules/bundle_discount_rule'
 
-describe BundleDiscountRule do
+describe PriceRules::BundleDiscountRule do
   subject(:item_discount) { described_class.new(sku: 'vga', min_items: 1, pairing_sku: 'mbp',
                                                 discount_price: 0, original_price: 30.00) }
 

@@ -14,13 +14,13 @@ describe 'Integration Specs' do
   let(:product_price) { products.map{|p| [p[:sku], p[:price]]}.to_h}
 
   let(:ipad_discount_price) {499.99}
-  let(:tv_promotion) { ProductPromotionRule.new({sku: 'atv', min_items: 3,
+  let(:tv_promotion) { PriceRules::ProductPromotionRule.new({sku: 'atv', min_items: 3,
                                                  discount_price: 0,
                                                  original_price:  product_price['atv']})}
-  let(:ipad_promotion) { BulkDiscountRule.new({sku: 'ipd', min_items: 5,
+  let(:ipad_promotion) { PriceRules::BulkDiscountRule.new({sku: 'ipd', min_items: 5,
                                                  discount_price: ipad_discount_price,
                                                  original_price: product_price['ipd']})}
-  let(:free_adapter) { BundleDiscountRule.new({sku: 'vga', min_items: 1,
+  let(:free_adapter) { PriceRules::BundleDiscountRule.new({sku: 'vga', min_items: 1,
                                                discount_price: 0,
                                                pairing_sku: 'mbp',
                                                original_price: product_price['vga']})}

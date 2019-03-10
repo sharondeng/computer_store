@@ -25,7 +25,7 @@ describe Checkout do
 
     describe "#product promotion" do
       let(:products) { [{sku: 'atv', name: 'Apple TV', price: 109.50 }] }
-      let(:tv_promotion) {[ProductPromotionRule.new({sku: 'atv', min_items: 3,
+      let(:tv_promotion) {[PriceRules::ProductPromotionRule.new({sku: 'atv', min_items: 3,
                                                      discount_price: 0,
                                                      original_price: products.first[:price]})]}
       subject(:checkout) { described_class.new(products, tv_promotion)}
@@ -51,7 +51,7 @@ describe Checkout do
     describe "#bulk discount" do
       let(:products) { [{sku: 'ipd', name: 'Super iPad',  price: 549.99}] }
       let(:discount_price) {499.99}
-      let(:ipad_promotion) {BulkDiscountRule.new({sku: 'ipd', min_items: 5,
+      let(:ipad_promotion) {PriceRules::BulkDiscountRule.new({sku: 'ipd', min_items: 5,
                                                   discount_price: discount_price,
                                                   original_price: products.first[:price]})}
       let(:price_rules) {[ipad_promotion]}
@@ -82,7 +82,7 @@ describe Checkout do
     describe "#bundle discount" do
       let(:products) { [{sku: 'vga', name: 'VGA adapter',  price: 30.00},
                         {sku: 'mbp', name: 'MacBook Pro',  price: 1399.99}] }
-      let(:free_vga) {BundleDiscountRule.new({sku: 'vga', min_items: 1,
+      let(:free_vga) {PriceRules::BundleDiscountRule.new({sku: 'vga', min_items: 1,
                                                   discount_price: 0,
                                                   pairing_sku: 'mbp',
                                                   original_price: products.first[:price]})}

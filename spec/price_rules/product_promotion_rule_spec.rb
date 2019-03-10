@@ -1,6 +1,6 @@
 require_relative '../../lib/price_rules/product_promotion_rule'
 
-describe ProductPromotionRule do
+describe PriceRules::ProductPromotionRule do
   subject(:item_discount) { described_class.new(sku: 'atv', min_items: 3, discount_price: 0, original_price: 109.50) }
 
   describe '#apply' do

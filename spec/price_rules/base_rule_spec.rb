@@ -1,6 +1,6 @@
 require_relative '../../lib/price_rules/base_rule'
 
-describe BaseRule do
+describe PriceRules::BaseRule do
   subject(:item_discount) { described_class.new(sku: 'ipod', min_items: 3, discount_price: 450.00, original_price: 499.99) }
 
   describe '#apply_discount' do

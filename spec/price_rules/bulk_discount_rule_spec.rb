@@ -1,6 +1,6 @@
 require_relative '../../lib/price_rules/bulk_discount_rule'
 
-describe BulkDiscountRule do
+describe PriceRules::BulkDiscountRule do
   subject(:item_discount) { described_class.new(sku: 'ipod', min_items: 3, discount_price: 450.00, original_price: 499.99) }
 
   describe '#apply' do
