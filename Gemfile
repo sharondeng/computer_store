@@ -8,6 +8,7 @@ end
 raise 'Ruby version must be greater than 2.3' unless RUBY_VERSION.to_f >= 2.3
 
 gem 'money'
+gem 'require_all'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

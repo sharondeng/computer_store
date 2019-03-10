@@ -1,6 +1,5 @@
-require_relative '../lib/checkout'
-require_relative '../lib/price_rules/product_promotion_rule'
-require_relative '../lib/price_rules/bulk_discount_rule'
+require 'require_all'
+require_all 'lib'
 
 describe Checkout do
   let(:item_1) { {sku: 'ipd', name: 'Super iPad',  price: 549.99} }
