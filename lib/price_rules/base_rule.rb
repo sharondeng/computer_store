@@ -18,7 +18,7 @@ class BaseRule
   end
 
   def apply_discount(order)
-    # defind in derived class
+    puts '---- to be defined in derived class'
     # return value to be substracted from total
   end
 end
