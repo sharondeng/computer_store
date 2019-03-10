@@ -4,6 +4,9 @@ require 'money'
 
 class Checkout
 
+  # Raised when item is not in product catalog
+  class InvalidItemCode < StandardError; end
+
   attr_reader :products, :pricing_rules, :order, :price_list
 
   def initialize(products = Catalogue::PRODUCTS, pricing_rules = nil)
@@ -14,7 +17,7 @@ class Checkout
   end
 
   def scan(item_code)
-    fail "#{item_code} is not a valid item code" unless item_in_products?(item_code)
+    raise InvalidItemCode, "#{item_code} is not a valid item code" unless item_in_products?(item_code)
     @order[item_code] += 1
   end
 
