@@ -9,13 +9,13 @@ describe Checkout do
   subject(:checkout) { described_class.new(products)}
 
   describe '#scan' do
-    it 'is expected to raise an error if given a code that is not in products' do
+    it 'should raise an error if given a code that is not in products' do
       expect{ checkout.scan('abc') }.to raise_error 'abc is not a valid item code'
     end
   end
 
   describe '#total' do
-    it 'is expected to return the cost without discount' do
+    it 'should to return the cost without discount' do
       checkout.scan('ipd')
       checkout.scan('ipd')
       checkout.scan('atv')
@@ -31,7 +31,7 @@ describe Checkout do
                                                      original_price: products.first[:price]})]}
       subject(:checkout) { described_class.new(products, tv_promotion)}
 
-      it 'is expected to return the cost without discount' do
+      it 'should return the cost without discount' do
         checkout.scan('atv')
         checkout.scan('atv')
 
@@ -39,7 +39,7 @@ describe Checkout do
         expect(checkout.total).to eq '$219.00'
       end
 
-      it 'is expected to apply discount price: buy 3 with price of 2' do
+      it 'should apply discount price: buy 3 with price of 2' do
         checkout.scan('atv')
         checkout.scan('atv')
         checkout.scan('atv')
@@ -90,7 +90,7 @@ describe Checkout do
       let(:price_rules) {[free_vga]}
       subject(:checkout) { described_class.new(products, price_rules)}
 
-      it 'is expected to return the cost without discount' do
+      it 'should return the cost without discount' do
         checkout.scan('vga')
         checkout.scan('vga')
 
@@ -98,7 +98,7 @@ describe Checkout do
         expect(checkout.total).to eq '$60.00'
       end
 
-      it 'is expected to apply discount price: a free VGA adapter free with every MacBook Pro sold' do
+      it 'should apply discount price: a free VGA adapter free with every MacBook Pro sold' do
         checkout.scan('vga')
         checkout.scan('mbp')
 
@@ -106,7 +106,7 @@ describe Checkout do
         expect(checkout.total).to eq '$1399.99'
       end
 
-      it 'is expected to apply discount price on one vga' do
+      it 'should apply discount price on one vga' do
         checkout.scan('vga')
         checkout.scan('vga')
         checkout.scan('mbp')

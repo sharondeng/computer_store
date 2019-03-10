@@ -8,11 +8,11 @@ describe ProductPromotionRule do
       expect(item_discount.apply({ 'atv' => 2 })).to eq 0
     end
 
-    it 'should apply discount price because number of items is 3' do
+    it 'should apply discount price because it reaches the min items' do
       expect(item_discount.apply({ 'atv' => 3 })).to eq item_discount.original_price
     end
 
-    it 'should apply discount price twice because number of items is 6' do
+    it 'should apply discount price twice because the number of items is doubled min' do
       expect(item_discount.apply({ 'atv' => 6 })).to eq item_discount.original_price * 2
     end
   end

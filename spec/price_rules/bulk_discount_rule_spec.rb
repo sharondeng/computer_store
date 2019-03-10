@@ -8,7 +8,7 @@ describe BulkDiscountRule do
       expect(item_discount.apply({ 'ipod' => 2 })).to eq 0
     end
 
-    it 'should apply discount price because number of items is the min items' do
+    it 'should apply discount price because it reaches the min items' do
       expect(item_discount.apply({ 'ipod' => 3 })).to eq (item_discount.original_price - item_discount.discount_price) * 3
     end
 
