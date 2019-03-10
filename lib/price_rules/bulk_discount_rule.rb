@@ -2,7 +2,7 @@ require_relative 'base_rule'
 
 # e.g. the brand new Super iPad will have a bulk discounted applied,
 # where the price will drop to $499.99 each, if someone buys more than 4
-class BundleDiscountRule < BaseRule
+class BulkDiscountRule < BaseRule
 
   attr_reader :discount_price
 

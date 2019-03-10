@@ -1,6 +1,6 @@
 require_relative '../lib/checkout'
 require_relative '../lib/price_rules/product_promotion_rule'
-require_relative '../lib/price_rules/bundle_discount_rule'
+require_relative '../lib/price_rules/bulk_discount_rule'
 
 describe Checkout do
   let(:item_1) { {sku: 'ipd', name: 'Super iPad',  price: 549.99} }
@@ -52,9 +52,9 @@ describe Checkout do
     describe "#bundle discount" do
       let(:products) { [{sku: 'ipd', name: 'Super iPad',  price: 549.99}] }
       let(:discount_price) {499.99}
-      let(:ipad_promotion) {BundleDiscountRule.new({sku: 'ipd', min_items: 5,
-                                                    discount_price: discount_price,
-                                                    original_price: products.first[:price]})}
+      let(:ipad_promotion) {BulkDiscountRule.new({sku: 'ipd', min_items: 5,
+                                                  discount_price: discount_price,
+                                                  original_price: products.first[:price]})}
       let(:price_rules) {[ipad_promotion]}
       subject(:checkout) { described_class.new(products, price_rules)}
 
