@@ -8,13 +8,13 @@ describe Checkout do
   subject(:checkout) { described_class.new(products)}
 
   describe '#scan' do
-    it 'should raise an error if given a code that is not in products' do
+    it 'should raise an error if an item is not in product catalogue' do
       expect{ checkout.scan('abc') }.to raise_error 'abc is not a valid item code'
     end
   end
 
   describe '#total' do
-    it 'should to return the cost without discount' do
+    it 'should return the cost without discount' do
       checkout.scan('ipd')
       checkout.scan('ipd')
       checkout.scan('atv')
@@ -57,7 +57,7 @@ describe Checkout do
       let(:price_rules) {[ipad_promotion]}
       subject(:checkout) { described_class.new(products, price_rules)}
 
-      it 'is expected to return the cost without discount' do
+      it 'should return the cost without discount' do
         checkout.scan('ipd')
         checkout.scan('ipd')
         checkout.scan('ipd')
@@ -67,7 +67,7 @@ describe Checkout do
         expect(checkout.total).to eq '$2199.96'
       end
 
-      it 'is expected to apply discount price: where the price will drop to $499.99 each, if someone buys more than 4' do
+      it 'should apply discount price: where the price will drop to $499.99 each, if someone buys more than 4' do
         checkout.scan('ipd')
         checkout.scan('ipd')
         checkout.scan('ipd')
