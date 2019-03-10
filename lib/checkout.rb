@@ -1,4 +1,4 @@
-require_relative '../config/initializers/constants'
+require 'catalogue'
 require 'product'
 require 'money'
 
@@ -6,7 +6,7 @@ class Checkout
 
   attr_reader :products, :pricing_rules, :order, :price_list
 
-  def initialize(products = Constants::PRODUCTS, pricing_rules = nil)
+  def initialize(products = Catalogue::PRODUCTS, pricing_rules = nil)
     @products = products.map{|p| Product.new(p)}
     @price_list = @products.map{|p|[p.sku, p.price]}.to_h
     @pricing_rules = pricing_rules

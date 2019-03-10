@@ -1,4 +1,4 @@
-class Constants
+module Catalogue
   PRODUCTS = [
       { sku: 'ipd', name: 'Super iPad',   price: 549.99 },
       { sku: 'mbp', name: 'MacBook Pro',  price: 1399.99 },
