@@ -1,5 +1,8 @@
 class BaseRule
 
+  # Raised when abstract method is not implement in derived class
+  class NotImplementedError < StandardError; end
+
   attr_reader :sku, :min_items, :original_price, :discount_price
 
   def initialize(options)
@@ -19,7 +22,7 @@ class BaseRule
   end
 
   def apply_discount(order)
-    puts '---- to be defined in derived class'
     # return value to be substracted from total
+    raise NotImplementedError, 'Abstract method must be implemented in derived class'
   end
 end
