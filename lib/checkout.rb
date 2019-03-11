@@ -1,5 +1,5 @@
-require 'catalogue'
-require 'product'
+require_relative 'catalogue'
+require_relative 'product'
 require 'money'
 
 class Checkout
