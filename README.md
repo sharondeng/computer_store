@@ -72,6 +72,8 @@ checkout = Checkout.new(products, pricing_rules)
 # #total => this returns the total cost
 
 # Example 1:  3 for 2 deal on Apple TVs
+# SKUs Scanned: atv, atv, atv, vga
+# Total expected: $249.00
 checkout = Checkout.new(products, pricing_rules)
 checkout.scan 'atv'
 checkout.scan 'atv'
@@ -82,6 +84,8 @@ checkout.total
 => '$249.00'
 
 # Example 2:  the price will drop to $499.99 each, if a customer buys more than 4
+# SKUs Scanned: atv, ipd, ipd, atv, ipd, ipd, ipd
+# Total expected: $2718.95
 checkout = Checkout.new(products, pricing_rules)
 checkout.scan 'atv'
 checkout.scan 'ipd'
@@ -95,6 +99,8 @@ checkout.total
 => '$2718.95'
 
 # Example 3:  a free VGA adapter will be included, if a customer buys a MacBook Pro
+# SKUs Scanned: mbp, vga, ipd
+# Total expected: $1949.98
 checkout = Checkout.new(nil, pricing_rules)
 checkout.scan 'mbp'
 checkout.scan 'vga'
