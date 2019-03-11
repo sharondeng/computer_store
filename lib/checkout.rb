@@ -3,14 +3,16 @@ require_relative 'product'
 require 'money'
 
 class Checkout
+  include Catalogue
 
   # Raised when item is not in product catalog
   class InvalidItemCode < StandardError; end
 
   attr_reader :products, :pricing_rules, :order, :price_list
 
-  def initialize(products = Catalogue::PRODUCTS, pricing_rules = nil)
-    @products = products.map{|p| Product.new(p)}
+  def initialize(products = nil, pricing_rules = nil)
+    prod = products || load_catalogue
+    @products = prod.map{|p| Product.new(p)}
     @price_list = @products.map{|p|[p.sku, p.price]}.to_h
     @pricing_rules = pricing_rules
     @order = Hash.new(0)
