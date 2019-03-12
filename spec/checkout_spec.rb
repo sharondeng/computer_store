@@ -5,7 +5,7 @@ describe Checkout do
   let(:item_1) { {sku: 'ipd', name: 'Super iPad',  price: 549.99} }
   let(:item_2) { {sku: 'atv', name: 'Apple TV', price: 109.50} }
   let(:products) { [item_1, item_2] }
-  subject(:checkout) { described_class.new(products)}
+  subject(:checkout) { described_class.new(products: products)}
 
   describe '#scan' do
     it 'should raise an error if an item is not in product catalogue' do
@@ -27,7 +27,7 @@ describe Checkout do
       let(:products) { [{sku: 'atv', name: 'Apple TV', price: 109.50 }] }
       let(:tv_promotion) {[PriceRules::ProductPromotionRule.new({sku: 'atv', min_items: 3,
                                                      discount_price: 0})]}
-      subject(:checkout) { described_class.new(products, tv_promotion)}
+      subject(:checkout) { described_class.new(products: products, pricing_rules: tv_promotion)}
 
       it 'should return the cost without discount' do
         checkout.scan('atv')
@@ -53,7 +53,7 @@ describe Checkout do
       let(:ipad_promotion) {PriceRules::BulkDiscountRule.new({sku: 'ipd', min_items: 5,
                                                   discount_price: discount_price})}
       let(:price_rules) {[ipad_promotion]}
-      subject(:checkout) { described_class.new(products, price_rules)}
+      subject(:checkout) { described_class.new(products: products, pricing_rules: price_rules)}
 
       it 'should return the cost without discount' do
         checkout.scan('ipd')
@@ -84,7 +84,7 @@ describe Checkout do
                                                   discount_price: 0,
                                                   pairing_sku: 'mbp'})}
       let(:price_rules) {[free_vga]}
-      subject(:checkout) { described_class.new(products, price_rules)}
+      subject(:checkout) { described_class.new(products: products, pricing_rules: price_rules)}
 
       it 'should return the cost without discount' do
         checkout.scan('vga')

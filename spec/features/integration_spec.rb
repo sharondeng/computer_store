@@ -22,7 +22,7 @@ describe 'Integration Specs' do
                                                discount_price: 0,
                                                pairing_sku: 'mbp'})}
   let(:pricing_rules) { [tv_promotion, ipad_promotion, free_adapter] }
-  subject(:checkout) { Checkout.new(products, pricing_rules) }
+  subject(:checkout) { Checkout.new(products: products, pricing_rules: pricing_rules) }
 
   it 'should carry out 3 for 2 deal on Apple TVs' do
     # SKUs Scanned: atv, atv, atv, vga

@@ -10,11 +10,11 @@ class Checkout
 
   attr_reader :products, :pricing_rules, :order, :price_list
 
-  def initialize(products = nil, pricing_rules = nil)
-    prod = products || load_catalogue
+  def initialize(options)
+    prod = options[:products] || load_catalogue
     @products = prod.map{|p| Product.new(p)}
     @price_list = @products.map{|p|[p.sku, p.price]}.to_h
-    @pricing_rules = pricing_rules
+    @pricing_rules = options[:pricing_rules]
     @order = Hash.new(0)
   end
 
