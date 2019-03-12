@@ -14,6 +14,11 @@ describe Checkout do
   end
 
   describe '#total' do
+    it 'should return 0 if there is no item scanned' do
+      expect(checkout.send(:total_cost)).to eq 0
+      expect(checkout.total).to eq '$0.00'
+    end
+
     it 'should return the cost without discount' do
       checkout.scan('ipd')
       checkout.scan('ipd')
