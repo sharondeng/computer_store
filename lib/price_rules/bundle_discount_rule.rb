@@ -16,7 +16,7 @@ module PriceRules
       order[sku] >= min_items && order[pairing_sku] >= min_items
     end
 
-    def apply_discount(order)
+    def apply_discount(order, original_price)
       delta_price = original_price - discount_price
       if order[pairing_sku] >= order[sku]
         delta_price * order[sku]

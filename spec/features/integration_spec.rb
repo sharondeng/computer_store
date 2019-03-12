@@ -15,15 +15,12 @@ describe 'Integration Specs' do
 
   let(:ipad_discount_price) {499.99}
   let(:tv_promotion) { PriceRules::ProductPromotionRule.new({sku: 'atv', min_items: 3,
-                                                 discount_price: 0,
-                                                 original_price:  product_price['atv']})}
+                                                 discount_price: 0})}
   let(:ipad_promotion) { PriceRules::BulkDiscountRule.new({sku: 'ipd', min_items: 5,
-                                                 discount_price: ipad_discount_price,
-                                                 original_price: product_price['ipd']})}
+                                                 discount_price: ipad_discount_price})}
   let(:free_adapter) { PriceRules::BundleDiscountRule.new({sku: 'vga', min_items: 1,
                                                discount_price: 0,
-                                               pairing_sku: 'mbp',
-                                               original_price: product_price['vga']})}
+                                               pairing_sku: 'mbp'})}
   let(:pricing_rules) { [tv_promotion, ipad_promotion, free_adapter] }
   subject(:checkout) { Checkout.new(products, pricing_rules) }
 

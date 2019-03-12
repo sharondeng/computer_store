@@ -43,7 +43,7 @@ class Checkout
   def apply_discounts(cost_before_discounts, order)
     return cost_before_discounts unless pricing_rules
     pricing_rules.reduce(cost_before_discounts) do |current_total, rule|
-      current_total - rule.apply(order)
+      current_total - rule.apply(order, price_list)
     end
   end
 
