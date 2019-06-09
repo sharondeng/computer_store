@@ -3,6 +3,47 @@
 A simple ruby app for a computer store to calculate the total cost base on the price list and pricing rules at the checkout.  
 This is a simple coding exercise without any database, or rails (MVC) framework.
 
+## Ruby demo project
+To build the checkout system for a computer store
+
+The following products in the catalogue:
+```
+| SKU     | Name        | Price    |
+| --------|:-----------:| --------:|
+| ipd     | Super iPad  | $549.99  |
+| mbp     | MacBook Pro | $1399.99 |
+| atv     | Apple TV    | $109.50  |
+| vga     | VGA adapter | $30.00   |
+```
+
+And special deals:
+
+- 'buy 3 Apple TVs and get 1 for free deal': to buy 3 Apple TVs, pay the price of 2 only
+- 'iPad bulk discounted discount deal': where the price will drop to $499.99 each, if someone buys more than 4 iPad
+- 'bundle free VGA adapter deall':  free VGA adapter with every MacBook Pro sold
+
+The interface to the checkout looks like this:
+
+```
+  co = new Checkout(pricingRules);
+  co.scan(item1);
+  co.scan(item2);
+  co.total();
+```
+
+Example scenarios
+```
+SKUs Scanned: atv, atv, atv, vga
+Total expected: $249.00
+
+SKUs Scanned: atv, ipd, ipd, atv, ipd, ipd, ipd
+Total expected: $2718.95
+
+SKUs Scanned: mbp, vga, ipd
+Total expected: $1949.98
+```
+
+
 ## Installation Instructions
 
 It is required to install ruby (ver >= 2.3) for running the app. After ruby installation, a few ruby gem files can be installed by 
